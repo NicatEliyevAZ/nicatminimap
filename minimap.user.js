@@ -1,8 +1,8 @@
 // ==UserScript==
-// @name         PixelTr Minimap
-// @namespace    http://discord.io/pixeltr
-// @version      3.1.1
-// @description  Pixelcanvas Minimap     ☪ | PixelTurkey | ☪
+// @name         Pixelcanvas Minimap
+// @namespace    http://tampermonkey.net/
+// @version      3.1
+// @description  Pixelcanvas Minimap
 // @author       Some Anon && Qh0stM4N
 // @match        https://pixelcanvas.io/*
 // @match        http://pixelcanvas.io/*
@@ -91,7 +91,7 @@ window.addEventListener('load', function () {
     drawCursor();
 
     document.getElementById("hide-map").onclick = function () {
-        // console.log("This should do something, but it doesn't");
+        console.log("This should do something, but it doesn't");
         toggle_show = false;
         document.getElementById("minimap-box").style.display = "none";
         document.getElementById("minimap-config").style.display = "none";
@@ -167,31 +167,16 @@ window.addEventListener('load', function () {
     updateloop();
 
 }, false);
-function exportMd() {
-    var ttlpx = 0;
-    var mdstr = "";
 
-    Object.keys(template_list).map(function (index, ele) {
-        var eles = template_list[index];
-        mdstr += '\n#### ' + index;
-        mdstr += '\n[![](https://raw.githubusercontent.com/Priz001/Pixelcanvas-Minimap/master/images/' + eles.name + ')]';
-        mdstr += '(http://pixelcanvas.io/@' + Math.floor(eles.x + eles.width / 2) + ',' + Math.floor(eles.y + eles.height / 2) + ')'
-        mdstr += '\n';
-        ttlpx += eles.width * eles.height;
-    });
-    mdstr = '### Toplam pixel sayısı =' + ttlpx + '\n' + mdstr;
-    console.log(mdstr);
-}
 function updateloop() {
 
-    // console.log("Updating Template List");
+    console.log("Updating Template List");
     // Get JSON of available templates
     var xmlhttp = new XMLHttpRequest();
     var url = window.baseTepmlateUrl + "/templates/data.json";
     xmlhttp.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
             template_list = JSON.parse(this.responseText);
-            //exportMd();
             if (!toggle_follow)
                 getCenter();
         }
@@ -199,7 +184,7 @@ function updateloop() {
     xmlhttp.open("GET", url, true);
     xmlhttp.send();
 
-    // console.log("Refresh got forced.");
+    console.log("Refresh got forced.");
     image_list = [];
     loadTemplates();
 
@@ -264,11 +249,11 @@ function loadTemplates() {
     var x_right = x_window * 1 + minimap.width / zoomlevel / 2;
     var y_top = y_window * 1 - minimap.height / zoomlevel / 2;
     var y_bottom = y_window * 1 + minimap.height / zoomlevel / 2;
-    // console.log("x_left : " + x_left);
-    // console.log("x_right : " + x_right);
-    // console.log("y_top : " + y_top);
-    // console.log("y_bottom : " + y_bottom);
-    // console.log(template_list);
+    //console.log("x_left : " + x_left);
+    //console.log("x_right : " + x_right);
+    //console.log("y_top : " + y_top);
+    //console.log("y_bottom : " + y_bottom);
+    console.log(template_list);
     var keys = [];
     for (var k in template_list) keys.push(k);
     needed_templates = [];
@@ -282,7 +267,7 @@ function loadTemplates() {
         var temp_yb = template_list[template]["y"] * 1 + template_list[template]["height"] * 1;
         if (temp_xr <= x_left || temp_yb <= y_top || temp_x >= x_right || temp_y >= y_bottom)
             continue
-        // console.log(" Template " + template + " is in range!");
+        console.log(" Template " + template + " is in range!");
         needed_templates.push(template);
     }
     if (needed_templates.length == 0) {
@@ -309,7 +294,7 @@ function loadTemplates() {
 }
 
 function loadImage(imagename) {
-    // console.log("    Load image " + imagename);
+    console.log("    Load image " + imagename);
     image_list[imagename] = new Image();
     if (cachebreaker != null)
         image_list[imagename].src = window.baseTepmlateUrl + "/images/" + template_list[imagename].name;
@@ -400,9 +385,9 @@ function findCoor() {
     Array.prototype.forEach.call(elms, function (elm) {
         var style = elm.style.cssText;
         if (style == "position: absolute; left: 1em; bottom: 1em;") {
-            // console.log("Found It!");
+            console.log("Found It!");
             coorDOM = elm.firstChild;
-            // console.log(coorDOM.innerHTML);
+            console.log(coorDOM.innerHTML);
         }
     });
 }

@@ -4,8 +4,8 @@
 // @version      3.1
 // @description  Pixelcanvas Minimap
 // @author       Some Anon && Qh0stM4N
-// @match        https://pixelcanvas.io/*
-// @match        http://pixelcanvas.io/*
+// @match        https://pixelzone.io/*
+// @match        http://pixelzone.io/*
 // @homepage     https://github.com/NicatEliyevAZ/nicatminimap/
 // @updateURL    https://raw.githubusercontent.com/NicatEliyevAZ/nicatminimap/blob/master/minimap.user.js
 // @downloadURL  https://raw.githubusercontent.com/NicatEliyevAZ/nicatminimap/blob/master/minimap.user.js
